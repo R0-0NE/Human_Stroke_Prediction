@@ -18,3 +18,4 @@ This dataset is used to predict whether a patient is likely to get stroke based 
 11) smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"*
 12) stroke: 1 if the patient had a stroke or 0 if not
 *Note: "Unknown" in smoking_status means that the information is unavailable for this patient
+

@@ -4,9 +4,14 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from PIL import Image
+import mlflow
+from urllib.parse import urlparse
 
 # Load the model
 model = joblib.load('notebook/strokemodel.pkl')
+
+# Set up MLflow experiment
+mlflow.set_experiment('Human Stroke Prediction')
 
 import base64
 
@@ -75,14 +80,37 @@ for column in ['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking
 # Prediction and output
 if st.button('Predict', help="Click to get prediction"):
     try:
-        # Make the prediction
-        prediction = model.predict(input_data)
-        
-        # Display the result with custom message and color
-        if prediction[0] == 1:
-            st.markdown("<h2 style='color: #FF4500;'>The patient is likely to have a stroke.</h2>", unsafe_allow_html=True)
-        else:
-            st.markdown("<h2 style='color: #32CD32;'>The patient is unlikely to have a stroke.</h2>", unsafe_allow_html=True)
+        mlflow.set_registry_uri("https://dagshub.com/R0-0NE/Human_Stroke_Prediction.mlflow")
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
+        with mlflow.start_run():
+            # Log input parameters
+            mlflow.log_params({
+                'gender': gender,
+                'age': age,
+                'hypertension': hypertension,
+                'heart_disease': heart_disease,
+                'ever_married': ever_married,
+                'work_type': work_type,
+                'residence_type': residence_type,
+                'avg_glucose_level': avg_glucose_level,
+                'bmi': bmi,
+                'smoking_status': smoking_status
+            })
+
+            # Make the prediction
+            prediction = model.predict(input_data)
+            
+            # Log the prediction
+            mlflow.log_metric('prediction', int(prediction[0]))
+            # Make the prediction
+            prediction = model.predict(input_data)
+            
+            # Display the result with custom message and color
+            if prediction[0] == 1:
+                st.markdown("<h2 style='color: #FF4500;'>The patient is likely to have a stroke.</h2>", unsafe_allow_html=True)
+            else:
+                st.markdown("<h2 style='color: #32CD32;'>The patient is unlikely to have a stroke.</h2>", unsafe_allow_html=True)
     except Exception as e:
         st.write('Error during prediction:', str(e))
 
