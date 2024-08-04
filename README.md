@@ -19,3 +19,22 @@ This dataset is used to predict whether a patient is likely to get stroke based 
 12) stroke: 1 if the patient had a stroke or 0 if not
 *Note: "Unknown" in smoking_status means that the information is unavailable for this patient
 
+### Data Source:
+The dataset used in this project is publicly available on [Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset). It consists of patient records and various health parameters that are used to predict the likelihood of a stroke.
+
+### Project Structure
+
+---notebook-->data--->stroke-data.csv #raw data
+    |
+    EDA.ipynb                  #Eda jupyter notebook
+    Model_Prediction.ipynb     #model prediction
+    strokemodel.pkl            #model pickle file
+---path_to_image
+    |
+    strokeimage.jpg            # Background image for app
+---venv
+---app.py                      #Streamlit basic app
+---requirements.txt            #require files for installation
+---Readme.md file
+
+
