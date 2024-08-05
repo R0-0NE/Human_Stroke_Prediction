@@ -22,19 +22,19 @@ This dataset is used to predict whether a patient is likely to get stroke based 
 ### Data Source:
 The dataset used in this project is publicly available on [Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset). It consists of patient records and various health parameters that are used to predict the likelihood of a stroke.
 
-### Project Structure
+## Project Structure
 
----notebook-->data--->stroke-data.csv #raw data
-    |
-    EDA.ipynb                  #Eda jupyter notebook
-    Model_Prediction.ipynb     #model prediction
-    strokemodel.pkl            #model pickle file
----path_to_image
-    |
-    strokeimage.jpg            # Background image for app
----venv
----app.py                      #Streamlit basic app
----requirements.txt            #require files for installation
----Readme.md file
+### ---notebook-->data--->stroke-data.csv #raw data
+###    |
+###    EDA.ipynb                  #Eda jupyter notebook
+###    Model_Prediction.ipynb     #model prediction
+###    strokemodel.pkl            #model pickle file
+### ---path_to_image
+###    |
+###    strokeimage.jpg            # Background image for app
+### ---venv
+### ---app.py                      #Streamlit basic app
+### ---requirements.txt            #require files for installation
+### ---Readme.md file
 
 
